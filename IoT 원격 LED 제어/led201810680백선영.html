@@ -1,0 +1,209 @@
+<!--201810680백선영-->
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+
+  button{
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+  }
+  .on-button {
+    background-color: #e57357;
+
+  }
+  .off-button {
+    background-color: #b71c1c;
+
+  }
+  /* Global */
+body {
+    background: #ffd8d8;
+    padding: 50px;
+}
+a {
+	-webkit-transition: all 150ms ease;
+	-moz-transition: all 150ms ease;
+	-ms-transition: all 150ms ease;
+	-o-transition: all 150ms ease;
+	transition: all 150ms ease;
+	}
+
+
+/* Container */
+.container-fluid {
+    background: #FFFFFF;
+    margin: 40px auto 10px;
+    padding: 20px 40px 0;
+    max-width: 960px;
+}
+
+
+/* Page Header */
+.page-header {
+    background: #ffa7a7;
+    margin: -30px -40px 40px;
+    padding: 20px 40px;
+    border-top: 4px solid #ccc;
+    color: #999;
+    text-transform: uppercase;
+    }
+    .page-header h3 {
+        line-height: 0.88rem;
+        color: #000;
+        }
+
+
+
+/* Thumbnail Box */
+.caption h4 {
+    font-size: 1rem;
+    color: #444;
+    }
+    .caption p {
+        font-size: 0.75rem;
+        color: #999;
+        }
+        .btn.btn-mini {
+            font-size: 0.63rem;
+            }
+
+
+/* Carousel Control */
+.control-box {
+    text-align: right;
+    width: 100%;
+    }
+
+
+/* Footer */
+.footer {
+    margin: auto;
+    width: 100%;
+    max-width: 960px;
+    display: block;
+    font-size: 0.69rem;
+    }
+    .footer, .footer a {
+        color: #ffff;
+        }
+        p.right  {
+            float: right;
+            }
+
+
+
+/* ADD-ON
+-------------------------------------------------- */
+body:after{content:"less than 320px";font-size:1rem;font-weight:bold;position:fixed;bottom:0;width:100%;text-align:center;background-color:hsla(1,60%,40%,0.7);color:#fff;height:20px;padding-top:0;margin-left:0;left:0}@media only screen and (min-width:320px){body:after{content:"320 to 480px";background-color:hsla(90,60%,40%,0.7);height:20px;padding-top:0;margin-left:0}}@media only screen and (min-width:480px){body:after{content:"480 to 768px";background-color:hsla(180,60%,40%,0.7);height:20px;padding-top:0;margin-left:0}}@media only screen and (min-width:768px){body:after{content:"768 to 980px";background-color:hsla(270,60%,40%,0.7);height:20px;padding-top:0;margin-left:0}}@media only screen and (min-width:980px){body:after{content:"980 to 1024px";background-color:hsla(300,60%,40%,0.7);height:20px;padding-top:0;margin-left:0}}@media only screen and (min-width:1024px){body:after{content:"1024 and up";background-color:hsla(360,60%,40%,0.7);height:20px;padding-top:0;margin-left:0}}
+
+::selection { background: #ff5e99; color: #FFFFFF; text-shadow: 0; }
+::-moz-selection { background: #ff5e99; color: #FFFFFF; }
+
+a, a:focus, a:active, a:hover, object, embed { outline: none; }
+:-moz-any-link:focus { outline: none; }
+input::-moz-focus-inner { border: 0; }
+  </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+
+            <div class="page-header">
+                <h3>LED 제어</h3>
+            </div>
+
+            <div class="carousel slide" id="myCarousel">
+                <div class="carousel-inner">
+                    <div class="item active d-flex">
+                        <ul class="thumbnails navbar-nav  d-flex">
+
+                            <h4>201810680 백선영</h4>
+                            <!--led 상태가 출력될 곳-->
+                            <h1 id="OUT_TEXT"></h1>
+                            <!--버튼 클릭 시 이벤트 연결-->
+                            <button class = "on-button" id= "onBtn" onclick="onFunction()">LED ON</button>
+                            <button class = "off-button" id="offBtn" onclick="offFunction()">LED OFF</button>
+
+                        </ul>
+                    </div><!-- /Slide1 -->
+
+                </div>
+
+            </div><!-- /#myCarousel -->
+
+        </div><!-- /.span12 -->
+    </div><!-- /.row -->
+</div><!-- /.container -->
+
+
+
+
+<strong></p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDJXInmP6scZ0JnhMAb1rdq1jbELzOZTwI",
+    authDomain: "led-on-off-c039a.firebaseapp.com",
+    databaseURL: "https://led-on-off-c039a.firebaseio.com",
+    projectId: "led-on-off-c039a",
+    storageBucket: "led-on-off-c039a.appspot.com",
+    messagingSenderId: "686693683720",
+    appId: "1:686693683720:web:96739c5ddca8da5cde77bd",
+    measurementId: "G-C64Q2D1ZZW"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+      </script>
+
+    <script>
+        // DB에서 텍스트 값 얻어오기
+        var led_on = document.getElementById('ON_BUTTON');
+        var led_off = document.getElementById('OFF_BUTTON');
+
+        // firebase의 LED_STATUS값 가져오기
+        var dbRef = firebase.database().ref().child('LED_STATUS');
+
+        // ON 버턴 클릭하여 DB 값 변경
+        function onFunction() {
+            dbRef.set('ON')
+        }
+          // OFF 버튼 클릭하여 DB 값 변경
+        function offFunction() {
+            dbRef.set('OFF')
+        }
+        // 현재 상태의 DB 값 읽어오기
+        dbRef.on("value", function(snapshot) {
+
+          if (snapshot.val() == 'ON') {//DB 값이 'ON'이면 h1의 텍스트 값을 'LED is ON'로 변경
+            OUT_TEXT.innerText = 'LED is ON';
+          } else if (snapshot.val() == 'OFF'){//DB 값이 'OFF'이면 h1의 텍스트 값을 'LED is OFF'로 변경
+            OUT_TEXT.innerText = 'LED is OFF';
+          }
+        }, function (error) {//에러코드
+          console.log("Error: " + error.code);
+        });
+      </script>
+</body>
+</html>
